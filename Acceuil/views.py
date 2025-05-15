@@ -1,3 +1,4 @@
+from django.http import HttpResponseBadRequest
 from django.shortcuts import render
 from . import views
 from Etudiants.models import Etudiants
@@ -41,17 +42,25 @@ def noter_cours(request, cours_id):
         messages.error(request, "Vous n'avez pas accès à ce cours.")
         return redirect('detailsE', cours_id)
 
-    evaluation, created = Evaluation.objects.get_or_create(etudiant=etudiant, cours=cours)
-    if request.method == 'POST':
-        form = EvaluationForm(request.POST, instance=evaluation)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Merci pour votre évaluation !")
-            return redirect('detailsE', cours_id)
-    else:
-        form = EvaluationForm(instance=evaluation)
+    evaluation = Evaluation.objects.filter(etudiant=etudiant, cours=cours).first()
+    form = EvaluationForm(request.POST, instance=evaluation)
+    note = request.POST.get('note')
+    commentaire = request.POST.get('commentaire')
+    if note is None:
+        return HttpResponseBadRequest("La note est requise.")
 
-    return render(request, 'noter_cours.html', {
-        'cours': cours,
-        'form': form
-    })
+    if evaluation is None:
+        evaluation = Evaluation.objects.create(
+            etudiant=etudiant,
+            cours=cours,
+            note=note
+        )
+    else:
+        evaluation.note = note
+        evaluation.commentaire = commentaire
+        evaluation.save()
+
+
+    messages.success(request, "Merci pour ta note !")
+    return redirect('detailsE', id=cours.id)
+
