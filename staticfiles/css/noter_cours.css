@@ -1,0 +1,52 @@
+body {
+  background: #f4f7ff;
+  font-family: "Segoe UI", sans-serif;
+  padding: 40px;
+  color: #1a2b50;
+}
+
+.noter-wrapper {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 span {
+  font-weight: normal;
+  color: #444;
+}
+
+.noter-form .form-group {
+  margin-bottom: 20px;
+}
+
+.noter-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.noter-form select,
+.noter-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn-submit {
+  background: #1a2b50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: #2e3f70;
+}

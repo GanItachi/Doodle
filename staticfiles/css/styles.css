@@ -1,0 +1,11 @@
+.login-messages {
+  margin-bottom: 15px;
+}
+
+.message {
+  background-color: #ffe0e0;
+  color: #900;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}

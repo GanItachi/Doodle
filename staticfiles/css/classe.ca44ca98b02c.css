@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fb;
+  color: #1a2b50;
+}
+
+.classe-wrapper {
+  padding: 2rem;
+}
+
+.classe-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.classe-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.classe-header h1 span {
+  color: #0317ef;
+}
+
+.classe-header p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Grille des étudiants */
+.grille-etudiants {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.carte-etudiant {
+  background: #ffffff;
+  border: 1px solid #dde3f0;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  text-align: center;
+  padding: 1rem;
+}
+
+.carte-etudiant:hover {
+  transform: translateY(-5px);
+}
+
+.photo-wrapper {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #0317ef44;
+}
+
+.photo-etudiant {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-etudiant h3 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1.1rem;
+}
+
+.niveau {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.etablissement {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.empty-classe {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 2rem;
+}

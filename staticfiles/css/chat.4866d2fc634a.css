@@ -1,0 +1,43 @@
+.chat-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f0fbff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  max-width: 75%;
+}
+
+.sent {
+  background: #00b4d8;
+  color: white;
+  margin-left: auto;
+}
+
+.received {
+  background: #e9ecef;
+  color: black;
+  margin-right: auto;
+}
+
+.btn-envoyer {
+  padding: 10px 20px;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

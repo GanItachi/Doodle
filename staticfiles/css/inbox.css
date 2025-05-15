@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f6fa;
+}
+
+.navbar {
+  background: linear-gradient(to right, #00b4d8, #0077b6);
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  color: white;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 15px;
+}
+
+.navbar-title {
+  font-size: 1.5em;
+}
+
+.inbox-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-section h2 {
+  margin: 0;
+  color: #1a2b50;
+}
+
+.header-section p {
+  color: #666;
+  margin-top: 5px;
+}
+
+.message-list {
+  margin-top: 30px;
+}
+
+.message-item-lu {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background-color: #e0f7ff;
+  border-left: 5px solid #dbdcdc;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.message-item-nlu {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background-color: #e0f7ff;
+  border-left: 5px solid #00b4d8;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.message-item:hover {
+  background: #e6eaff;
+}
+
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message-content {
+  margin-left: 15px;
+  color: #333;
+  flex: 1;
+}
+
+.expediteur {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.preview {
+  margin: 5px 0;
+  color: #555;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.no-message {
+  color: #999;
+  text-align: center;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.notif-badge {
+  position: relative;
+  top: -5px;
+  right: -10px;
+  background-color: rgb(0, 255, 140);
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 60%;
+}

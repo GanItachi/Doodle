@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #00b4d8, #0077b6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  animation: popIn 0.7s ease;
+  max-width: 400px;
+  width: 100%;
+}
+
+.icon-success {
+  width: 80px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #0077b6;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #00b4d8;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #0077b6;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
