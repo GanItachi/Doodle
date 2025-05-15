@@ -102,8 +102,8 @@ WSGI_APPLICATION = 'GLC_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':  'doodle_new',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':  BASE_DIR / 'db.sqlite3',
         'USER' : 'root',
         'PASSWORD' : '',
         'HOST' : 'localhost',
