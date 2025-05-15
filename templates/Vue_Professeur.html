@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil Professeur – DOODLE</title>
+    <link rel="stylesheet" href="{% static 'css/professeur.css' %}" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <a class="navbar-brand" href="{% url 'accueil' %}">
+        <img src="{% static 'img/Doo.png' %}" alt="ENSEA" class="logo" />
+      </a>
+      <div class="container">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'AccP' %}">ACCUEIL</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'coursP' %}">MES COURS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link notif-box" href="{% url 'gerer_postulations' %}">
+              📨 Boîte de postulations {% if postulation_count > 0 %}
+              <span class="notif-badge">{{ postulation_count }}</span>
+              {% endif %}
+            </a>
+          </li>
+          <li>
+            <a class="nav-link notif-box" href="{% url 'messagerie:inbox' %}"
+              >Boîte de réception {% if messages_count > 0 %}
+              <span class="notif-badge">{{ messages_count }}</span>
+              {% endif %}</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <div class="profile">
+              <img
+                src="{{ Professeur.photo.url }}"
+                alt="Photo de profil"
+                class="profile-pic"
+              />
+              <span>{{ Professeur.prenom }} {{ Professeur.nom }}</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{% url 'profil_Professeur'%}"
+                  >MON PROFIL</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'logoutp' %}"
+                  >DÉCONNEXION</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- SECTION PRINCIPALE -->
+    <section class="main-prof">
+      <div class="welcome-box">
+        <h1 class="welcome-title">
+          Bonjour {{ Professeur.prenom }} {{ Professeur.nom }} 👋
+        </h1>
+        <p class="welcome-text">
+          Bienvenue dans votre espace d'enseignement. Vous pouvez consulter,
+          publier et suivre vos cours ici.
+        </p>
+        <a href="{% url 'coursP' %}" class="btn-access">Voir mes cours</a>
+      </div>
+
+      <!-- CARTE POSTULATIONS --
+      <div class="postulation-card">
+        <h2>📋 Gérer les demandes d’inscription</h2>
+        <p>Consultez les étudiants souhaitant rejoindre vos cours.</p>
+        <a href="{% url 'gerer_postulations' %}"
+          >Accéder à la boîte de postulations</a
+        >
+      </div>-->
+    </section>
+
+    <script>
+      window.addEventListener("pageshow", function (event) {
+        if (
+          event.persisted ||
+          (window.performance && window.performance.navigation.type === 2)
+        ) {
+          // Si la page vient du cache de l'historique (flèche retour)
+          window.location.reload(); // Force le rechargement
+        }
+      });
+    </script>
+  </body>
+</html>

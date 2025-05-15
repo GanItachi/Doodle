@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion – DOODLE</title>
+    <link rel="stylesheet" href="{% static 'css/loginP.css' %}" />
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Colonne gauche : image -->
+      <div class="login-image">
+        <img src="{% static 'img/Doodle.png' %}" alt="Illustration" />
+      </div>
+
+      <!-- Colonne droite : formulaire -->
+      <div class="login-form">
+        <h2 class="title">Connexion</h2>
+
+        {% if messages %}
+        <div class="login-messages">
+          {% for message in messages %}
+          <p class="message">{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" class="form-box">
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit" class="btn-login">Se connecter</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

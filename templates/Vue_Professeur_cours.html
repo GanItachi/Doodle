@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mes cours - Professeur</title>
+    <link rel="stylesheet" href="{% static 'css/cours_prof.css' %}" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'img/Doo.png' %}" alt="ENSEA" class="logo" />
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="{% url 'AccP' %}">Accueil</a></li>
+        <li><a class="active" href="#">Mes cours</a></li>
+      </ul>
+      <div class="profile">
+        <img src="{{ Professeur.photo.url }}" class="profile-pic" />
+        <div class="dropdown">
+          <span>{{ Professeur.prenom }} {{ Professeur.nom }}</span>
+          <div class="dropdown-menu">
+            <a href="{% url 'profil_Professeur' %}">Mon Profil</a>
+            <a href="{% url 'logoutp' %}">Déconnexion</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- LISTE DES COURS -->
+    <main class="cours-container">
+      <h1>Mes cours</h1>
+      <div class="cards-grid">
+        {% for cours in cours %}
+        <div class="cours-card">
+          <img
+            src="{{ cours.illustration.url }}"
+            alt="Illustration"
+            class="cours-img"
+          />
+          <div class="cours-info">
+            <h2>{{ cours.titre }}</h2>
+            <p class="desc">{{ cours.description|truncatewords:25 }}</p>
+            <a href="{% url 'details' cours.id %}" class="btn-details"
+              >Charger</a
+            >
+
+            <span class="voir-cours"
+              ><a href="{% url 'voir_classe' cours.id%}">Ma classe</a></span
+            >
+          </div>
+        </div>
+        {% empty %}
+        <p class="empty-message">Aucun cours disponible pour le moment.</p>
+        {% endfor %}
+      </div>
+    </main>
+  </body>
+</html>

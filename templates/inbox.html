@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📥 Messagerie – Doodle</title>
+    <link rel="stylesheet" href="{% static 'css/inbox.css' %}" />
+  </head>
+  <body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+      <a href="{% url 'accueil' %}" class="logo">
+        <img src="{% static 'img/Doo.png' %}" alt="Doodle" />
+      </a>
+      <h1 class="navbar-title">Messagerie</h1>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="inbox-container">
+      <section class="header-section">
+        <h2>📥 Boîte de réception</h2>
+        <p>Consultez vos derniers échanges</p>
+      </section>
+
+      <section class="message-list">
+        {% for msg in messages %}
+        <a
+          href="{% url 'messagerie:envoyer' msg.expediteur.id %}"
+          class="{% if msg.lu %}message-item-lu{% else %}message-item-nlu{% endif %}"
+        >
+          <div class="avatar">
+            <img
+              src="{% if msg.expediteur.etudiants.photo %}{{ msg.expediteur.etudiants.photo.url }}{% elif msg.expediteur.professeurs.photo %}{{ msg.expediteur.professeurs.photo.url }}{% else %}{% static 'img/default.png' %}{% endif %}"
+              alt="Avatar"
+            />
+          </div>
+          <div class="message-content">
+            <span class="expediteur">{{ msg.expediteur.get_full_name }}</span>
+            <p class="preview">{{ msg.contenu|truncatechars:60 }}</p>
+            <span class="timestamp">{{ msg.date_envoi|date:"d M Y H:i" }}</span>
+            {% if not msg.lu %}<span class="notif-badge">📧</span>{% endif %}
+          </div>
+        </a>
+        {% empty %}
+        <p class="no-message">📭 Aucun message reçu pour l’instant.</p>
+        {% endfor %}
+      </section>
+    </main>
+
+    <script>
+      window.addEventListener("pageshow", function (event) {
+        if (
+          event.persisted ||
+          (window.performance && window.performance.navigation.type === 2)
+        ) {
+          // Si la page vient du cache de l'historique (flèche retour)
+          window.location.reload(); // Force le rechargement
+        }
+      });
+    </script>
+  </body>
+</html>

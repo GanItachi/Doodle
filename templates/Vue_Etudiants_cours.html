@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mes cours - DOODLE</title>
+    <link rel="stylesheet" href="{% static 'css/cours_etudiant.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="{% url 'accueil' %}" class="navbar-brand">
+          <img
+            src="{% static 'img/Doo.png' %}"
+            alt="ENSEA"
+            class="logo-navbar"
+          />
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="{% url 'Acc' %}">Accueil</a></li>
+          <li><a href="{% url 'LISTE' %}">Mes cours</a></li>
+          <li>
+            <a class="nav-link notif-box" href="{% url 'messagerie:inbox' %}"
+              >Boîte de réception {% if messages_count > 0 %}
+              <span class="notif-badge">{{ messages_count }}</span>
+              {% endif %}</a
+            >
+          </li>
+        </ul>
+
+        <div class="dropdown">
+          <div class="profile-btn">
+            <a href="{% url 'profil_etudiant' %}">
+              <img
+                src="{{ etudiant.photo.url }}"
+                alt="Photo"
+                class="profile-pic"
+              />
+            </a>
+            <span>{{ etudiant.prenom }}</span>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'profil_etudiant' %}">Mon Profil</a></li>
+            <li><a href="{% url 'logout' %}">Déconnexion</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% if messages %}
+    <div class="login-messages">
+      {% for message in messages %}
+      <p class="message">{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- SECTION DES COURS -->
+    <section class="cours-section">
+      <div class="cours-container">
+        {% for cours in cours %} {% if cours.niveau in niveaux_autorises %}
+        <div class="cours-card">
+          <img
+            src="{{ cours.illustration.url }}"
+            alt="Image du cours"
+            class="cours-img"
+          />
+          <div class="cours-info">
+            <h3 class="cours-titre">
+              <a>{{ cours.titre }}</a>
+            </h3>
+            <p class="cours-desc">{{ cours.description|truncatewords:20 }}</p>
+            <p class="cours-meta">
+              Niveau : {{ cours.niveau }} | {{ cours.nombre_heures }} heures
+            </p>
+            <p class="cours-prof">
+              Par : {{ cours.professeur.nom }} {{ cours.professeur.prenom }}
+            </p>
+
+            {% if cours.professeur and cours.professeur.user %}
+            <span class="contact-professeur">
+              <a
+                href="{% url 'messagerie:envoyer' cours.professeur.user.id %}"
+                class="btn-contacter"
+              >
+                📬 Contacter le professeur
+              </a>
+            </span>
+            {% if cours.id in cours_inscrits %}
+            <span class="badge-inscrit">📅 Inscrit</span>
+            <span class="voir-cours"
+              ><a href="{% url 'detailsE' cours.id %}"> Voir le cours</a></span
+            >
+            {% elif cours.id in cours_postules %}
+            <span class="badge-en-attente">⌛ En attente</span>
+            {% else %}
+            <form
+              method="post"
+              action="{% url 'postuler_cours' cours.id %}"
+              class="postule-form"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn-postuler">✉️ Postuler</button>
+            </form>
+            {% endif %} {% else %}
+            <p class="no-prof">
+              Ce cours n’a pas encore de professeur assigné.
+            </p>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %} {% empty %}
+        <p class="no-course">Aucun cours disponible pour le moment.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <script>
+      window.addEventListener("pageshow", function (event) {
+        if (
+          event.persisted ||
+          (window.performance && window.performance.navigation.type === 2)
+        ) {
+          // Si la page vient du cache de l'historique (flèche retour)
+          window.location.reload(); // Force le rechargement
+        }
+      });
+    </script>
+  </body>
+</html>

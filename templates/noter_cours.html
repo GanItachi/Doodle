@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Noter le cours – {{ cours.titre }}</title>
+    <link rel="stylesheet" href="{% static 'css/noter_cours.css' %}" />
+  </head>
+  <body>
+    <div class="noter-wrapper">
+      <h2>📊 Évaluez le cours : <span>{{ cours.titre }}</span></h2>
+
+      <form method="post" class="noter-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_note">Note :</label>
+          {{ form.note }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_commentaire">Commentaire :</label>
+          {{ form.commentaire }}
+        </div>
+
+        <button type="submit" class="btn-submit">
+          ✅ Soumettre l'évaluation
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

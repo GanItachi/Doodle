@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inscription – DOODLE</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+  </head>
+  <body>
+    <div class="register-wrapper">
+      <!-- COLONNE FORMULAIRE -->
+      <div class="form-left">
+        <form
+          method="POST"
+          action="{% url 'register' %}"
+          enctype="multipart/form-data"
+          class="form-accordion"
+        >
+          {% csrf_token %}
+          <h2>Créer un compte étudiant</h2>
+
+          <!-- Accordéon : Informations personnelles -->
+          <div class="accordion-section">
+            <button class="accordion-toggle" type="button">
+              📇 Informations personnelles
+            </button>
+            <div class="accordion-content">
+              <label for="prenom">Prénom</label>
+              <input type="text" name="prenom" id="prenom" required />
+
+              <label for="nom">Nom</label>
+              <input type="text" name="nom" id="nom" required />
+
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" required />
+
+              <label for="password">Mot de passe</label>
+              <input type="password" name="password" id="password" required />
+            </div>
+          </div>
+
+          <!-- Accordéon : Informations académiques -->
+          <div class="accordion-section">
+            <button class="accordion-toggle" type="button">
+              🎓 Informations académiques
+            </button>
+            <div class="accordion-content">
+              <label for="etablissement">Établissement</label>
+              <input type="text" name="etablissement" id="etablissement" />
+
+              <label for="niveau_etude">Niveau d’étude</label>
+              <select name="niveau_etude" id="niveau_etude">
+                <option value="Licence 1">Licence 1</option>
+                <option value="Licence 2">Licence 2</option>
+                <option value="Master 1">Master 1</option>
+                <option value="Master 2">Master 2</option>
+              </select>
+
+              <label for="filiere">Filière</label>
+              <input type="text" name="filiere" id="filiere" />
+            </div>
+          </div>
+
+          <!-- Accordéon : Compléments -->
+          <div class="accordion-section">
+            <button class="accordion-toggle" type="button">
+              🧾 Compléments
+            </button>
+            <div class="accordion-content">
+              <label for="date_naissance">Date de naissance</label>
+              <input type="date" name="date_naissance" id="date_naissance" />
+
+              <label for="sexe">Sexe</label>
+              <select name="sexe" id="sexe">
+                <option value="M">Masculin</option>
+                <option value="F">Féminin</option>
+              </select>
+
+              <label for="nationalite">Nationalité</label>
+              <select name="nationalite" id="nationalite">
+                <option value="ML">Mali</option>
+                <option value="CI">Côte d'Ivoire</option>
+                <option value="CM">Cameroun</option>
+                <option value="TG">Togo</option>
+                <option value="BF">Burkina Faso</option>
+              </select>
+
+              <label for="photo">Photo</label>
+              <input type="file" name="photo" id="photo" />
+            </div>
+          </div>
+          {% if form.errors %}
+          <div class="error-message">
+            <ul>
+              {% for field in form %} {% for error in field.errors %}
+              <li><strong>{{ field.label }} :</strong> {{ error }}</li>
+              {% endfor %} {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+
+          <button type="submit" class="btn-submit">S'inscrire</button>
+        </form>
+      </div>
+
+      <!-- COLONNE LOGO / ACCUEIL -->
+      <div class="form-right">
+        <img
+          src="{% static 'img/DoodleL.png' %}"
+          alt="Logo DOODLE"
+          class="logo-register"
+        />
+        <h1>Bienvenue sur DOODLE</h1>
+        <p>Apprends autrement. Progresse librement.</p>
+        <p class="already">
+          Déjà inscrit ? <a href="{% url 'login' %}">Se connecter</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- JS pour accordéons -->
+    <script>
+      const toggles = document.querySelectorAll(".accordion-toggle");
+      toggles.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const content = btn.nextElementSibling;
+          content.classList.toggle("active");
+          btn.classList.toggle("open");
+        });
+      });
+    </script>
+  </body>
+</html>

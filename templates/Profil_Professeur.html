@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/profil.css' %}" />
+    <title>Profil de {{ Professeur.prenom }} {{ Professeur.nom }}</title>
+  </head>
+  <body>
+    <div class="profile-container">
+      <!-- Couverture -->
+      <div class="banner"></div>
+
+      <!-- Photo + nom -->
+      <div class="profile-card">
+        <div class="photo-wrapper">
+          {% if Professeur.photo %}
+          <img
+            src="{{Professeur.photo.url}}"
+            alt="Photo de profil"
+            class="profile-photo"
+          />
+          {% else %}
+          <img
+            src="/media/default_images/user.png"
+            alt="Photo par défaut"
+            class="profile-photo"
+          />
+          {% endif %}
+        </div>
+
+        <h2 class="student-name">
+          {{ Professeur.prenom }} {{ Professeur.nom }}
+        </h2>
+        <p class="student-email">{{ Professeur.email }}</p>
+
+        <!-- Formulaire de modification -->
+        <form
+          method="post"
+          enctype="multipart/form-data"
+          class="edit-profile-form"
+        >
+          {% csrf_token %} {{ form.non_field_errors }}
+
+          <!-- Affiche chaque champ avec label + input -->
+          {% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }} {{ field }} {% if field.help_text %}
+            <small class="help-text">{{ field.help_text }}</small>
+            {% endif %} {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+          {% endfor %}
+
+          <button type="submit" class="btn-submit">
+            💾 Enregistrer les modifications
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

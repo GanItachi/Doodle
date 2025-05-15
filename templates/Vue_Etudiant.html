@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Espace Étudiant – DOODLE</title>
+    <link rel="stylesheet" href="{% static 'css/etudiant.css' %}" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="{% url 'accueil' %}" class="navbar-brand">
+          <img
+            src="{% static 'img/Doo.png' %}"
+            alt="ENSEA"
+            class="logo-navbar"
+          />
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="{% url 'Acc' %}">Accueil</a></li>
+          <li><a href="{% url 'LISTE' %}">Mes cours</a></li>
+          <li>
+            <a class="nav-link notif-box" href="{% url 'messagerie:inbox' %}"
+              >Boîte de réception {% if messages_count > 0 %}
+              <span class="notif-badge">{{ messages_count }}</span>
+              {% endif %}</a
+            >
+          </li>
+        </ul>
+
+        <div class="dropdown">
+          <div class="profile-btn">
+            <img
+              src="{{ etudiant.photo.url }}"
+              alt="Photo"
+              class="profile-pic"
+            />
+            <span>{{ etudiant.prenom }}</span>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'profil_etudiant' %}">Mon Profil</a></li>
+            <li><a href="{% url 'logout' %}">Déconnexion</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- SECTION PRINCIPALE -->
+    <main class="main-section">
+      <div class="welcome-card">
+        <h1>👋 Bonjour {{ etudiant.prenom }} {{ etudiant.nom }}</h1>
+        <p>Bienvenue sur votre tableau de bord étudiant DOODLE.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dashboard-card">
+          <h3>📚 Mes Cours</h3>
+          <p>Accédez à tous les cours auxquels vous êtes inscrit.</p>
+          <a href="{% url 'LISTE' %}" class="btn-card">Voir les cours</a>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>👤 Mon Profil</h3>
+          <p>Consultez et modifiez vos informations personnelles.</p>
+          <a href="{% url 'profil_etudiant' %}" class="btn-card"
+            >Voir le profil</a
+          >
+        </div>
+
+        <div class="dashboard-card">
+          <h3>🚪 Déconnexion</h3>
+          <p>Quitter votre espace sécurisé.</p>
+          <a href="{% url 'logout' %}" class="btn-card">Se déconnecter</a>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      window.addEventListener("pageshow", function (event) {
+        if (
+          event.persisted ||
+          (window.performance && window.performance.navigation.type === 2)
+        ) {
+          // Si la page vient du cache de l'historique (flèche retour)
+          window.location.reload(); // Force le rechargement
+        }
+      });
+    </script>
+  </body>
+</html>

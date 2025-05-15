@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Postulations – DOODLE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/postulations.css' %}" />
+  </head>
+  <body>
+    <!-- NAVBAR DOODLE STYLE -->
+    <nav class="navbar">
+      <a class="navbar-brand" href="{% url 'accueil' %}">
+        <img src="{% static 'img/Doo.png' %}" alt="ENSEA" class="logo" />
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="{% url 'AccP' %}">Accueil</a></li>
+        <li><a href="{% url 'coursP' %}">Mes cours</a></li>
+        <li class="active"><a href="#">Postulations</a></li>
+      </ul>
+      <div class="profile">
+        <img
+          src="{{ Professeur.photo.url }}"
+          alt="Profil"
+          class="profile-pic"
+        />
+        <div class="dropdown">
+          <span>{{ Professeur.prenom }} {{ Professeur.nom }}</span>
+          <div class="dropdown-menu">
+            <a href="{% url 'profil_Professeur' %}">Mon Profil</a>
+            <a href="{% url 'logoutp' %}">Déconnexion</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENU -->
+    <div class="postulation-container">
+      <h1 class="page-title">📋 Boîte de postulations</h1>
+
+      {% if postulations %}
+      <div class="table-wrapper">
+        <table class="postulation-table">
+          <thead>
+            <tr>
+              <th>👤 Étudiant</th>
+              <th>📘 Cours</th>
+              <th>📅 Date</th>
+              <th>⚙️ Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for postulation in postulations %}
+            <tr>
+              <td>
+                <a
+                  href="{% url 'messagerie:envoyer' postulation.etudiant.user.id %}"
+                  class="contact-etudiant"
+                >
+                  {{ postulation.etudiant.prenom }} {{postulation.etudiant.nom}}
+                </a>
+              </td>
+
+              <td>{{ postulation.cours.titre }}</td>
+              <td>{{ postulation.date_postulation|date:"d M Y" }}</td>
+              <td>
+                <a
+                  href="{% url 'traiter_postulation' postulation.id 'accepter' %}"
+                  class="btn-accept"
+                  >✅ Accepter</a
+                >
+                <a
+                  href="{% url 'traiter_postulation' postulation.id 'refuser' %}"
+                  class="btn-decline"
+                  >❌ Refuser</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="no-post">Aucune demande en attente.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

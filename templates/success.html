@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inscription réussie – DOODLE</title>
+    <link rel="stylesheet" href="{% static 'css/success.css' %}" />
+  </head>
+  <body>
+    <div class="success-container">
+      <div class="card">
+        <img
+          src="{% static 'img/success.png' %}"
+          alt="Succès"
+          class="icon-success"
+        />
+        <h1>Inscription réussie !</h1>
+        <p>Bienvenue sur DOODLE. Votre compte a été créé avec succès.</p>
+        <a href="{% url 'login' %}" class="btn-back">Se connecter</a>
+      </div>
+    </div>
+  </body>
+</html>

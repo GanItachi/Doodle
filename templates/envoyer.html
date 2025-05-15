@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messagerie – Doodle</title>
+    <link rel="stylesheet" href="{% static 'css/messagerie.css' %}" />
+  </head>
+  <body>
+    <div class="messagerie-wrapper">
+      <!-- Sidebar -->
+      <aside class="messagerie-sidebar">
+        <h2 class="sidebar-title">💬 Conversations</h2>
+        <ul class="contact-list">
+          {% for conversation in users %}
+          <li
+            class="{% if conversation.id == destinataire.id %}active{% endif %}"
+          >
+            <a href="{% url 'messagerie:envoyer' conversation.id %}">
+              <img
+                src="{% if conversation.etudiants.photo %}{{ conversation.etudiants.photo.url }}{% elif conversation.professeurs.photo %}{{ conversation.professeurs.photo.url }}{% else %}{% static 'img/default.png' %}{% endif %}"
+                class="contact-avatar"
+                alt="Avatar"
+              />
+              <div class="contact-name">{{ conversation.get_full_name }}</div>
+            </a>
+          </li>
+          {% empty %}
+          <li class="empty-msg">Aucune discussion pour le moment.</li>
+          {% endfor %}
+        </ul>
+      </aside>
+
+      <!-- Chat Section -->
+      <main class="messagerie-main">
+        {% if destinataire %}
+        <div class="chat-header">
+          <img
+            src="{% if destinataire.etudiants.photo %}{{ destinataire.etudiants.photo.url }}{% elif destinataire.professeurs.photo %}{{ destinataire.professeurs.photo.url }}{% else %}{% static 'img/default.png' %}{% endif %}"
+            class="chat-avatar"
+            alt="Destinataire"
+          />
+          <h3 class="chat-name">{{ destinataire.get_full_name }}</h3>
+        </div>
+
+        <div class="chat-messages">
+          {% for message in messages %}
+          <div
+            class="chat-message {% if message.expediteur == user %}sent{% else %}received{% endif %}"
+          >
+            <div class="message-content">{{ message.contenu }}</div>
+            <span class="message-time"
+              >{{ message.date_envoi|date:"d M H:i" }}</span
+            >
+          </div>
+          {% endfor %}
+        </div>
+
+        <form method="post" class="chat-form">
+          {% csrf_token %}
+          <input
+            type="hidden"
+            name="destinataire_id"
+            value="{{ destinataire.id }}"
+          />
+          <input
+            type="text"
+            name="contenu"
+            placeholder="Écris ton message ici..."
+            class="form-input"
+            required
+          />
+          <button type="submit" class="form-button">📤</button>
+        </form>
+        {% else %}
+        <div class="no-chat">
+          <p>Sélectionne un utilisateur pour démarrer une conversation ✨</p>
+        </div>
+        {% endif %}
+      </main>
+    </div>
+  </body>
+</html>

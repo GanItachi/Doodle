@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Classe – {{ cours.titre }}</title>
+    <link rel="stylesheet" href="{% static 'css/classe.css' %}" />
+  </head>
+  <body>
+    <div class="classe-wrapper">
+      <header class="classe-header">
+        <img src="{% static 'img/Doo.png' %}" alt="Logo Doodle" class="logo" />
+        <h1>👩‍🏫 Classe de <span>{{ cours.titre }}</span></h1>
+        <p>{{ etudiants|length }} étudiant(s) inscrit(s)</p>
+      </header>
+
+      {% if etudiants %}
+      <div class="grille-etudiants">
+        {% for e in etudiants %}
+        <div class="carte-etudiant">
+          <div class="photo-wrapper">
+            <img
+              src="{{ e.photo.url }}"
+              alt="Photo de {{ e.prenom }}"
+              class="photo-etudiant"
+            />
+          </div>
+          <div class="info-etudiant">
+            <h3>{{ e.prenom }} {{ e.nom }}</h3>
+            <p class="niveau">{{ e.niveau_etude }}</p>
+            <p class="etablissement">{{ e.etablissement }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="empty-classe">Aucun étudiant inscrit pour le moment.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

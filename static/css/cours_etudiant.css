@@ -1,0 +1,263 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  background: #f4f9ff;
+  color: #333;
+}
+
+.navbar {
+  background: linear-gradient(to right, #00b4d8, #0077b6);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-navbar {
+  height: 45px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: gold;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile-pic {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  list-style: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #0077b6;
+  font-weight: 500;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.cours-section {
+  padding: 3rem 2rem;
+}
+
+.cours-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.cours-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.cours-card:hover {
+  transform: scale(1.02);
+}
+
+.cours-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.cours-info {
+  padding: 1.2rem;
+}
+
+.cours-titre a {
+  color: #0077b6;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.cours-titre a:hover {
+  color: #023e8a;
+}
+
+.cours-desc {
+  margin: 0.7rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.cours-meta {
+  font-size: 0.85rem;
+  color: #666;
+}
+.cours-prof {
+  font-size: 1rem;
+  color: #666;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.no-course {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* Badges d'inscription et de postulation */
+.badge-inscrit {
+  background-color: #dfffe0;
+  color: #1a8730;
+  border: 1px solid #1a873088;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.badge-en-attente {
+  background-color: #fff7dc;
+  color: #e6a700;
+  border: 1px solid #e6a70066;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* Bouton "Postuler" */
+.postule-form {
+  margin-top: 10px;
+}
+
+.btn-postuler {
+  background-color: #1a2b50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.btn-postuler:hover {
+  background-color: #2c3f6a;
+}
+
+.voir-cours {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+.voir-cours a {
+  background-color: #f0f6ff;
+  color: #1a2b50;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-decoration: none;
+  border: 1px solid #c1d9ff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.voir-cours a:hover {
+  background-color: #dce9ff;
+  color: #0e1c3d;
+}
+
+.contact-professeur {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.btn-contacter {
+  display: inline-block;
+  background-color: #1a2b50;
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-contacter:hover {
+  background-color: #2d4479;
+  transform: scale(1.03);
+}
+
+.no-prof {
+  color: #888;
+  font-style: italic;
+  margin-top: 10px;
+}
