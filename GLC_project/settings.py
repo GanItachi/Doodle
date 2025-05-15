@@ -161,3 +161,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login/Etudiant'  # Chemin de connexion personnalisé
 LOGIN_REDIRECT_URL = '/Etudiant/'  # Vers où aller après login automatique
+
+ALLOWED_HOSTS = ['*']
